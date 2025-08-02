@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friendship Day Celebration</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@700&display=swap');
+        
+        :root {
+            --primary: #ff6b6b;
+            --secondary: #4ecdc4;
+            --accent: #ffe66d;
+            --dark: #292f36;
+            --light: #f7fff7;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            color: var(--dark);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+            opacity: 0.1;
+            z-index: -1;
+            animation: rotate 20s linear infinite;
+        }
+        
+        .container::after {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -30%;
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(circle, var(--secondary) 0%, transparent 70%);
+            opacity: 0.1;
+            z-index: -1;
+            animation: rotate 25s linear infinite reverse;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: pulse 2s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--dark);
+            margin-bottom: 2rem;
+            opacity: 0.8;
+        }
+        
+        .quote-container {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .quote-container::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            font-size: 6rem;
+            font-family: 'Dancing Script', cursive;
+            color: var(--primary);
+            opacity: 0.2;
+            z-index: 0;
+        }
+        
+        .quote-text {
+            font-size: 1.5rem;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+            font-family: 'Arial Unicode MS', 'Nirmala UI', sans-serif;
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(0,0,0,.1);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin: 1rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--secondary), var(--primary));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .btn:hover::after {
+            opacity: 1;
+        }
+        
+        .btn span {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .heart {
+            position: absolute;
+            font-size: 1.5rem;
+            opacity: 0;
+            animation: float 6s linear infinite;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .friends-icon {
+            font-size: 2rem;
+            margin: 0 0.5rem;
+            display: inline-block;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        .friends-icon:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .friends-icon:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        .footer {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: var(--dark);
+            opacity: 0.7;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .quote-text {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Happy Friendship Day!</h1>
+        <div class="subtitle">
+            <span class="friends-icon">👫</span>
+            <span class="friends-icon">🤝</span>
+            <span class="friends-icon">💖</span>
+        </div>
+        
+        <div class="quote-container">
+            <div class="quote-text" id="quote-text">
+                <span class="loading"></span> Loading friendship quote...
+            </div>
+        </div>
+        
+        <button class="btn" id="new-quote-btn">
+            <span>Get New Quote</span>
+        </button>
+        
+        <div class="footer">
+            Celebrate the special bond of friendship today and every day!
+        </div>
+        
+        <div class="hearts" id="hearts-container"></div>
+    </div>
+
+    <script>
+        const quoteText = document.getElementById('quote-text');
+        const newQuoteBtn = document.getElementById('new-quote-btn');
+        const heartsContainer = document.getElementById('hearts-container');
+        const quoteContainer = document.querySelector('.quote-container');
+
+        // Hindi friendship quotes (without authors)
+        const HINDI_QUOTES = [
+            "दोस्ती छोटी सी जिंदगी का सबसे बड़ा तोहफा है।",
+            "सच्चा दोस्त वही है जो आपके आंसू पोंछे, भले ही वो आंसू उसी की वजह से क्यों न हों।",
+            "दोस्ती दिल से दिल का रिश्ता है, दिमाग से नहीं।",
+            "एक सच्चा दोस्त वह है जो आपके लिए तब भी खड़ा हो जब पूरी दुनिया आपके खिलाफ खड़ी हो।",
+            "दोस्ती का मतलब ये नहीं कि हमेशा साथ रहो, बल्कि ये कि जब भी मिलो वो पल यादगार बन जाए।",
+            "दोस्त वही है जो आपकी खामोशी को भी समझ जाए।",
+            "दोस्ती में दूरी कोई मायने नहीं रखती, दिलों का मिलना जरूरी है।",
+            "सच्चे दोस्त कभी अलग नहीं होते, भले ही रास्ते अलग हो जाएं।",
+            "दोस्ती एक ऐसा फूल है जो बिना किसी मौसम के खिलता है।",
+            "दोस्त वही है जो आपके अंधेरे में भी आपको रोशनी दिखा दे।",
+            "दोस्ती का रिश्ता खून के रिश्ते से भी ऊपर होता है।",
+            "अच्छे दोस्त जीवन में वही भूमिका निभाते हैं जो सूरज दिन में निभाता है।",
+            "दोस्त वह शीशा है जिसमें आप अपना असली चेहरा देख सकते हैं।",
+            "सच्ची दोस्ती कभी बूढ़ी नहीं होती, यह हमेशा जवान रहती है।",
+            "दोस्ती की डोर इतनी मजबूत होती है कि इसे कोई दूरी नहीं तोड़ सकती।"
+        ];
+
+        // Display random Hindi quote
+        function displayRandomQuote() {
+            // Animation effect
+            quoteContainer.style.transform = 'rotateY(90deg)';
+            
+            setTimeout(() => {
+                const randomIndex = Math.floor(Math.random() * HINDI_QUOTES.length);
+                quoteText.textContent = HINDI_QUOTES[randomIndex];
+                quoteContainer.style.transform = 'rotateY(0)';
+            }, 300);
+            
+            createHearts();
+        }
+
+        // Create floating hearts animation
+        function createHearts() {
+            // Clear existing hearts
+            heartsContainer.innerHTML = '';
+            
+            // Create new hearts
+            for (let i = 0; i < 10; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '❤️';
+                heart.style.left = `${Math.random() * 100}%`;
+                heart.style.top = `${Math.random() * 100}%`;
+                heart.style.animationDuration = `${4 + Math.random() * 6}s`;
+                heart.style.animationDelay = `${Math.random() * 2}s`;
+                heartsContainer.appendChild(heart);
+            }
+        }
+
+        // Event listener for new quote button
+        newQuoteBtn.addEventListener('click', displayRandomQuote);
+
+        // Display first quote on load
+        displayRandomQuote();
+
+        // Add confetti effect on button click
+        newQuoteBtn.addEventListener('click', () => {
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 100,
+                    spread: 70,
+                    origin: { y: 0.6 }
+                });
+            }
+        });
+
+        // Load confetti library if not already loaded
+        if (typeof confetti !== 'function') {
+            const script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js';
+            document.head.appendChild(script);
+        }
+    </script>
+</body>
+</html>
